@@ -26,7 +26,7 @@ os.system(
     'sed -i -e \'/(modelmerger_interface, "Checkpoint Merger", "modelmerger"),/d\' /home/user/app/stable-diffusion-webui/modules/ui.py'
 )
 os.system(
-    f'sed -i -e \'/(train_interface, "Train", "ti"),/d\' /home/user/app/stable-diffusion-webui/modules/ui.py'
+    'sed -i -e \'/(train_interface, "Train", "ti"),/d\' /home/user/app/stable-diffusion-webui/modules/ui.py'
 )
 os.system(
     f'sed -i -e \'/extensions_interface, "Extensions", "extensions"/d\' /home/user/app/stable-diffusion-webui/modules/ui.py'
