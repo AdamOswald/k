@@ -23,19 +23,19 @@ os.system(
     "sed -i -e '/import image_from_url_text/r /home/user/app/env_patch.py' /home/user/app/stable-diffusion-webui/modules/ui.py"
 )
 os.system(
-    f'sed -i -e \'/(modelmerger_interface, "Checkpoint Merger", "modelmerger"),/d\' /home/user/app/stable-diffusion-webui/modules/ui.py'
+    'sed -i -e \'/(modelmerger_interface, "Checkpoint Merger", "modelmerger"),/d\' /home/user/app/stable-diffusion-webui/modules/ui.py'
 )
 os.system(
-    f'sed -i -e \'/(train_interface, "Train", "ti"),/d\' /home/user/app/stable-diffusion-webui/modules/ui.py'
+    'sed -i -e \'/(train_interface, "Train", "ti"),/d\' /home/user/app/stable-diffusion-webui/modules/ui.py'
 )
 os.system(
-    f'sed -i -e \'/extensions_interface, "Extensions", "extensions"/d\' /home/user/app/stable-diffusion-webui/modules/ui.py'
+    'sed -i -e \'/extensions_interface, "Extensions", "extensions"/d\' /home/user/app/stable-diffusion-webui/modules/ui.py'
 )
 os.system(
-    f'sed -i -e \'/settings_interface, "Settings", "settings"/d\' /home/user/app/stable-diffusion-webui/modules/ui.py'
+    'sed -i -e \'/settings_interface, "Settings", "settings"/d\' /home/user/app/stable-diffusion-webui/modules/ui.py'
 )
 os.system(
-    f"""sed -i -e "s/document.getElementsByTagName('gradio-app')\[0\].shadowRoot/!!document.getElementsByTagName('gradio-app')[0].shadowRoot ? document.getElementsByTagName('gradio-app')[0].shadowRoot : document/g" /home/user/app/stable-diffusion-webui/script.js"""
+    """sed -i -e "s/document.getElementsByTagName('gradio-app')\[0\].shadowRoot/!!document.getElementsByTagName('gradio-app')[0].shadowRoot ? document.getElementsByTagName('gradio-app')[0].shadowRoot : document/g" /home/user/app/stable-diffusion-webui/script.js"""
 )
 os.system(
     "sed -i -e 's/                show_progress=False,/                show_progress=True,/g' /home/user/app/stable-diffusion-webui/modules/ui.py"
@@ -44,7 +44,7 @@ os.system(
     "sed -i -e 's/shared.demo.launch/shared.demo.queue().launch/g' /home/user/app/stable-diffusion-webui/webui.py"
 )
 os.system(
-    f"sed -i -e 's/ outputs=\[/queue=False, &/g' /home/user/app/stable-diffusion-webui/modules/ui.py"
+    "sed -i -e 's/ outputs=\[/queue=False, &/g' /home/user/app/stable-diffusion-webui/modules/ui.py"
 )
 os.system(
     "sed -i -e 's/               queue=False,  /                /g' /home/user/app/stable-diffusion-webui/modules/ui.py"
