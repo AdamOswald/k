@@ -32,7 +32,7 @@ os.system(
     'sed -i -e \'/extensions_interface, "Extensions", "extensions"/d\' /home/user/app/stable-diffusion-webui/modules/ui.py'
 )
 os.system(
-    f'sed -i -e \'/settings_interface, "Settings", "settings"/d\' /home/user/app/stable-diffusion-webui/modules/ui.py'
+    'sed -i -e \'/settings_interface, "Settings", "settings"/d\' /home/user/app/stable-diffusion-webui/modules/ui.py'
 )
 os.system(
     f"""sed -i -e "s/document.getElementsByTagName('gradio-app')\[0\].shadowRoot/!!document.getElementsByTagName('gradio-app')[0].shadowRoot ? document.getElementsByTagName('gradio-app')[0].shadowRoot : document/g" /home/user/app/stable-diffusion-webui/script.js"""
