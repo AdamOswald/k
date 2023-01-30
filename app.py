@@ -29,7 +29,7 @@ os.system(
     f'sed -i -e \'/(train_interface, "Train", "ti"),/d\' /home/user/app/stable-diffusion-webui/modules/ui.py'
 )
 os.system(
-    f'sed -i -e \'/extensions_interface, "Extensions", "extensions"/d\' /home/user/app/stable-diffusion-webui/modules/ui.py'
+    'sed -i -e \'/extensions_interface, "Extensions", "extensions"/d\' /home/user/app/stable-diffusion-webui/modules/ui.py'
 )
 os.system(
     f'sed -i -e \'/settings_interface, "Settings", "settings"/d\' /home/user/app/stable-diffusion-webui/modules/ui.py'
