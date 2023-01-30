@@ -1,12 +1,12 @@
 import os
 from subprocess import getoutput
 
-gpu_info = getoutput('nvidia-smi')
-if ("A10G" in gpu_info):
+gpu_info = getoutput("nvidia-smi")
+if "A10G" in gpu_info:
     os.system(
         "pip install -q https://github.com/camenduru/stable-diffusion-webui-colab/releases/download/0.0.15/xformers-0.0.15.dev0+4c06c79.d20221205-cp38-cp38-linux_x86_64.whl"
     )
-elif ("T4" in gpu_info):
+elif "T4" in gpu_info:
     os.system(
         "pip install -q https://github.com/camenduru/stable-diffusion-webui-colab/releases/download/0.0.15/xformers-0.0.15.dev0+1515f77.d20221130-cp38-cp38-linux_x86_64.whl"
     )
@@ -22,12 +22,21 @@ os.system(
 os.system(
     "sed -i -e '/import image_from_url_text/r /home/user/app/env_patch.py' /home/user/app/stable-diffusion-webui/modules/ui.py"
 )
-os.system(f"sed -i -e '/(modelmerger_interface, \"Checkpoint Merger\", \"modelmerger\"),/d' /home/user/app/stable-diffusion-webui/modules/ui.py")
-os.system(f"sed -i -e '/(train_interface, \"Train\", \"ti\"),/d' /home/user/app/stable-diffusion-webui/modules/ui.py")
-os.system(f"sed -i -e '/extensions_interface, \"Extensions\", \"extensions\"/d' /home/user/app/stable-diffusion-webui/modules/ui.py")
-os.system(f"sed -i -e '/settings_interface, \"Settings\", \"settings\"/d' /home/user/app/stable-diffusion-webui/modules/ui.py")
 os.system(
-    f'''sed -i -e "s/document.getElementsByTagName('gradio-app')\[0\].shadowRoot/!!document.getElementsByTagName('gradio-app')[0].shadowRoot ? document.getElementsByTagName('gradio-app')[0].shadowRoot : document/g" /home/user/app/stable-diffusion-webui/script.js''')
+    f'sed -i -e \'/(modelmerger_interface, "Checkpoint Merger", "modelmerger"),/d\' /home/user/app/stable-diffusion-webui/modules/ui.py'
+)
+os.system(
+    f'sed -i -e \'/(train_interface, "Train", "ti"),/d\' /home/user/app/stable-diffusion-webui/modules/ui.py'
+)
+os.system(
+    f'sed -i -e \'/extensions_interface, "Extensions", "extensions"/d\' /home/user/app/stable-diffusion-webui/modules/ui.py'
+)
+os.system(
+    f'sed -i -e \'/settings_interface, "Settings", "settings"/d\' /home/user/app/stable-diffusion-webui/modules/ui.py'
+)
+os.system(
+    f"""sed -i -e "s/document.getElementsByTagName('gradio-app')\[0\].shadowRoot/!!document.getElementsByTagName('gradio-app')[0].shadowRoot ? document.getElementsByTagName('gradio-app')[0].shadowRoot : document/g" /home/user/app/stable-diffusion-webui/script.js"""
+)
 os.system(
     "sed -i -e 's/                show_progress=False,/                show_progress=True,/g' /home/user/app/stable-diffusion-webui/modules/ui.py"
 )
@@ -35,7 +44,8 @@ os.system(
     "sed -i -e 's/shared.demo.launch/shared.demo.queue().launch/g' /home/user/app/stable-diffusion-webui/webui.py"
 )
 os.system(
-    f"sed -i -e 's/ outputs=\[/queue=False, &/g' /home/user/app/stable-diffusion-webui/modules/ui.py")
+    f"sed -i -e 's/ outputs=\[/queue=False, &/g' /home/user/app/stable-diffusion-webui/modules/ui.py"
+)
 os.system(
     "sed -i -e 's/               queue=False,  /                /g' /home/user/app/stable-diffusion-webui/modules/ui.py"
 )
@@ -60,11 +70,14 @@ if "IS_SHARED_UI" in os.environ:
     )
 
     os.system(
-        f"wget -q {os.getenv('MODEL_LINK')} -O /home/user/app/stable-diffusion-webui/models/Stable-diffusion/{os.getenv('MODEL_NAME')}")
+        f"wget -q {os.getenv('MODEL_LINK')} -O /home/user/app/stable-diffusion-webui/models/Stable-diffusion/{os.getenv('MODEL_NAME')}"
+    )
     os.system(
-        f"wget -q {os.getenv('VAE_LINK')} -O /home/user/app/stable-diffusion-webui/models/Stable-diffusion/{os.getenv('VAE_NAME')}")
+        f"wget -q {os.getenv('VAE_LINK')} -O /home/user/app/stable-diffusion-webui/models/Stable-diffusion/{os.getenv('VAE_NAME')}"
+    )
     os.system(
-        f"wget -q {os.getenv('YAML_LINK')} -O /home/user/app/stable-diffusion-webui/models/Stable-diffusion/{os.getenv('YAML_NAME')}")
+        f"wget -q {os.getenv('YAML_LINK')} -O /home/user/app/stable-diffusion-webui/models/Stable-diffusion/{os.getenv('YAML_NAME')}"
+    )
 
     os.system(
         "python launch.py --force-enable-xformers --disable-console-progressbars --enable-console-prompts --ui-config-file /home/user/app/shared-ui-config.json --ui-settings-file /home/user/app/shared-config.json --cors-allow-origins huggingface.co,hf.space --no-progressbar-hiding"
