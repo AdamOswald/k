@@ -2,18 +2,18 @@ import os
 from subprocess import getoutput
 
 os.system(
-    f"git clone -b v1.5 https://github.com/camenduru/stable-diffusion-webui /home/user/app/stable-diffusion-webui"
+    "git clone -b v1.5 https://github.com/camenduru/stable-diffusion-webui /home/user/app/stable-diffusion-webui"
 )
 os.chdir("/home/user/app/stable-diffusion-webui")
 
 os.system(
-    f"wget -q https://github.com/camenduru/webui/raw/main/env_patch.py -O /home/user/app/env_patch.py"
+    "wget -q https://github.com/camenduru/webui/raw/main/env_patch.py -O /home/user/app/env_patch.py"
 )
 os.system(
-    f"sed -i '$a fastapi==0.90.0' /home/user/app/stable-diffusion-webui/requirements_versions.txt"
+    "sed -i '$a fastapi==0.90.0' /home/user/app/stable-diffusion-webui/requirements_versions.txt"
 )
 os.system(
-    f"sed -i -e '/import image_from_url_text/r /home/user/app/env_patch.py' /home/user/app/stable-diffusion-webui/modules/ui.py"
+    "sed -i -e '/import image_from_url_text/r /home/user/app/env_patch.py' /home/user/app/stable-diffusion-webui/modules/ui.py"
 )
 os.system(
     f'sed -i -e \'/(modelmerger_interface, "Checkpoint Merger", "modelmerger"),/d\' /home/user/app/stable-diffusion-webui/modules/ui.py'
@@ -31,68 +31,68 @@ os.system(
     f"""sed -i -e "s/document.getElementsByTagName('gradio-app')\[0\].shadowRoot/!!document.getElementsByTagName('gradio-app')[0].shadowRoot ? document.getElementsByTagName('gradio-app')[0].shadowRoot : document/g" /home/user/app/stable-diffusion-webui/script.js"""
 )
 os.system(
-    f"sed -i -e 's/                show_progress=False,/                show_progress=True,/g' /home/user/app/stable-diffusion-webui/modules/ui.py"
+    "sed -i -e 's/                show_progress=False,/                show_progress=True,/g' /home/user/app/stable-diffusion-webui/modules/ui.py"
 )
 os.system(
-    f"sed -i -e 's/shared.demo.launch/shared.demo.queue().launch/g' /home/user/app/stable-diffusion-webui/webui.py"
+    "sed -i -e 's/shared.demo.launch/shared.demo.queue().launch/g' /home/user/app/stable-diffusion-webui/webui.py"
 )
 os.system(
     f"sed -i -e 's/ outputs=\[/queue=False, &/g' /home/user/app/stable-diffusion-webui/modules/ui.py"
 )
 os.system(
-    f"sed -i -e 's/               queue=False,  /                /g' /home/user/app/stable-diffusion-webui/modules/ui.py"
+    "sed -i -e 's/               queue=False,  /                /g' /home/user/app/stable-diffusion-webui/modules/ui.py"
 )
 
 # ----------------------------Please duplicate this space and delete this block if you don't want to see the extra header----------------------------
 os.system(
-    f"wget -q https://github.com/camenduru/webui/raw/main/header_patch.py -O /home/user/app/header_patch.py"
+    "wget -q https://github.com/camenduru/webui/raw/main/header_patch.py -O /home/user/app/header_patch.py"
 )
 os.system(
-    f"sed -i -e '/demo:/r /home/user/app/header_patch.py' /home/user/app/stable-diffusion-webui/modules/ui.py"
+    "sed -i -e '/demo:/r /home/user/app/header_patch.py' /home/user/app/stable-diffusion-webui/modules/ui.py"
 )
 # ---------------------------------------------------------------------------------------------------------------------------------------------------
 
 if "IS_SHARED_UI" in os.environ:
-    os.system(f"rm -rfv /home/user/app/stable-diffusion-webui/scripts/")
+    os.system("rm -rfv /home/user/app/stable-diffusion-webui/scripts/")
 
     os.system(
-        f"wget -q https://github.com/camenduru/webui/raw/main/shared-config.json -O /home/user/app/shared-config.json"
+        "wget -q https://github.com/camenduru/webui/raw/main/shared-config.json -O /home/user/app/shared-config.json"
     )
     os.system(
-        f"wget -q https://github.com/camenduru/webui/raw/main/shared-ui-config.json -O /home/user/app/shared-ui-config.json"
+        "wget -q https://github.com/camenduru/webui/raw/main/shared-ui-config.json -O /home/user/app/shared-ui-config.json"
     )
 
     os.system(
-        f"wget -q https://huggingface.co/ckpt/anything-v3-vae-swapped/resolve/main/anything-v3-vae-swapped.ckpt -O /home/user/app/stable-diffusion-webui/models/Stable-diffusion/anything-v3-vae-swapped.ckpt"
+        "wget -q https://huggingface.co/ckpt/anything-v3-vae-swapped/resolve/main/anything-v3-vae-swapped.ckpt -O /home/user/app/stable-diffusion-webui/models/Stable-diffusion/anything-v3-vae-swapped.ckpt"
     )
     # os.system(f"wget -q {os.getenv('MODEL_LINK')} -O /home/user/app/stable-diffusion-webui/models/Stable-diffusion/{os.getenv('MODEL_NAME')}")
     # os.system(f"wget -q {os.getenv('VAE_LINK')} -O /home/user/app/stable-diffusion-webui/models/Stable-diffusion/{os.getenv('VAE_NAME')}")
     # os.system(f"wget -q {os.getenv('YAML_LINK')} -O /home/user/app/stable-diffusion-webui/models/Stable-diffusion/{os.getenv('YAML_NAME')}")
 
     os.system(
-        f"python launch.py --skip-torch-cuda-test --precision full --no-half --use-cpu SD BSRGAN ESRGAN SCUNet CodeFormer --all --disable-console-progressbars --enable-console-prompts --ui-config-file /home/user/app/shared-ui-config.json --ui-settings-file /home/user/app/shared-config.json --cors-allow-origins huggingface.co,hf.space --no-progressbar-hiding"
+        "python launch.py --skip-torch-cuda-test --precision full --no-half --use-cpu SD BSRGAN ESRGAN SCUNet CodeFormer --all --disable-console-progressbars --enable-console-prompts --ui-config-file /home/user/app/shared-ui-config.json --ui-settings-file /home/user/app/shared-config.json --cors-allow-origins huggingface.co,hf.space --no-progressbar-hiding"
     )
 else:
     os.system(
-        f"wget -q https://gist.github.com/camenduru/9ec5f8141db9902e375967e93250860f/raw/d0bcf01786f20107c329c03f8968584ee67be12a/run_n_times.py -O /home/user/app/stable-diffusion-webui/scripts/run_n_times.py"
+        "wget -q https://gist.github.com/camenduru/9ec5f8141db9902e375967e93250860f/raw/d0bcf01786f20107c329c03f8968584ee67be12a/run_n_times.py -O /home/user/app/stable-diffusion-webui/scripts/run_n_times.py"
     )
 
     # Please duplicate this space and delete # character in front of the extension you want to use or add here more extensions with same structure os.system(f"git clone https://EXTENSION_GIT_URL /home/user/app/stable-diffusion-webui/extensions/EXTENSION_NAME")
     # os.system(f"git clone https://github.com/camenduru/stable-diffusion-webui-artists-to-study /home/user/app/stable-diffusion-webui/extensions/stable-diffusion-webui-artists-to-study")
     os.system(
-        f"git clone https://github.com/yfszzx/stable-diffusion-webui-images-browser /home/user/app/stable-diffusion-webui/extensions/stable-diffusion-webui-images-browser"
+        "git clone https://github.com/yfszzx/stable-diffusion-webui-images-browser /home/user/app/stable-diffusion-webui/extensions/stable-diffusion-webui-images-browser"
     )
     os.system(
-        f"git clone https://github.com/camenduru/deforum-for-automatic1111-webui /home/user/app/stable-diffusion-webui/extensions/deforum-for-automatic1111-webui"
+        "git clone https://github.com/camenduru/deforum-for-automatic1111-webui /home/user/app/stable-diffusion-webui/extensions/deforum-for-automatic1111-webui"
     )
     os.system(
-        f"git clone https://github.com/bbc-mc/merge-percentage-visualize /home/user/app/stable-diffusion-webui/extensions/merge-percentage-visualize"
+        "git clone https://github.com/bbc-mc/merge-percentage-visualize /home/user/app/stable-diffusion-webui/extensions/merge-percentage-visualize"
     )
     os.system(
-        f"git clone https://github.com/bbc-mc/sdweb-merge-board /home/user/app/stable-diffusion-webui/extensions/sdweb-merge-board"
+        "git clone https://github.com/bbc-mc/sdweb-merge-board /home/user/app/stable-diffusion-webui/extensions/sdweb-merge-board"
     )
     os.system(
-        f"git clone https://github.com/bbc-mc/sdweb-merge-block-weighted-gui /home/user/app/stable-diffusion-webui/extensions/sdweb-merge-block-weighted-gui"
+        "git clone https://github.com/bbc-mc/sdweb-merge-block-weighted-gui /home/user/app/stable-diffusion-webui/extensions/sdweb-merge-block-weighted-gui"
     )
 
     # Please duplicate this space and delete # character in front of the model you want to use or add here more ckpts with same structure os.system(f"wget -q https://CKPT_URL -O /home/user/app/stable-diffusion-webui/models/Stable-diffusion/CKPT_NAME.ckpt")
@@ -114,12 +114,12 @@ else:
     # os.system(f"wget -q https://raw.githubusercontent.com/Stability-AI/stablediffusion/main/configs/stable-diffusion/v2-inference-v.yaml -O /home/user/app/stable-diffusion-webui/models/Stable-diffusion/768-v-ema.yaml")
 
     os.system(
-        f"wget -q https://huggingface.co/stabilityai/stable-diffusion-2-1/resolve/main/v2-1_768-ema-pruned.ckpt -O /home/user/app/stable-diffusion-webui/models/Stable-diffusion/v2-1_768-ema-pruned.ckpt"
+        "wget -q https://huggingface.co/stabilityai/stable-diffusion-2-1/resolve/main/v2-1_768-ema-pruned.ckpt -O /home/user/app/stable-diffusion-webui/models/Stable-diffusion/v2-1_768-ema-pruned.ckpt"
     )
     os.system(
-        f"wget -q https://raw.githubusercontent.com/Stability-AI/stablediffusion/main/configs/stable-diffusion/v2-inference-v.yaml -O /home/user/app/stable-diffusion-webui/models/Stable-diffusion/v2-1_768-ema-pruned.yaml"
+        "wget -q https://raw.githubusercontent.com/Stability-AI/stablediffusion/main/configs/stable-diffusion/v2-inference-v.yaml -O /home/user/app/stable-diffusion-webui/models/Stable-diffusion/v2-1_768-ema-pruned.yaml"
     )
 
     os.system(
-        f"python launch.py --precision full --no-half --use-cpu SD BSRGAN ESRGAN SCUNet CodeFormer --all --ui-config-file /home/user/app/ui-config.json --ui-settings-file /home/user/app/config.json --disable-console-progressbars --enable-console-prompts --cors-allow-origins huggingface.co,hf.space --no-progressbar-hiding --api --skip-torch-cuda-test"
+        "python launch.py --precision full --no-half --use-cpu SD BSRGAN ESRGAN SCUNet CodeFormer --all --ui-config-file /home/user/app/ui-config.json --ui-settings-file /home/user/app/config.json --disable-console-progressbars --enable-console-prompts --cors-allow-origins huggingface.co,hf.space --no-progressbar-hiding --api --skip-torch-cuda-test"
     )
