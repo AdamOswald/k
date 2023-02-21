@@ -36,10 +36,7 @@
   "directories_max_prompt_words": 8,
   "ESRGAN_tile": 192,
   "ESRGAN_tile_overlap": 8,
-  "realesrgan_enabled_models": [
-    "R-ESRGAN 4x+",
-    "R-ESRGAN 4x+ Anime6B"
-  ],
+  "realesrgan_enabled_models": ["R-ESRGAN 4x+", "R-ESRGAN 4x+ Anime6B"],
   "upscaler_for_img2img": null,
   "use_scale_latent_for_hires_fix": false,
   "face_restoration_model": null,
